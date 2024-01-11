@@ -4,7 +4,7 @@ import products from '../products.js';
 import React from 'react';
 import Product from '../components/Product.jsx';
 
-const HomeScreen = () => {
+const HomePage = () => {
   return (
     <>
       <h1>Latest Products</h1>
@@ -19,4 +19,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default HomePage;
