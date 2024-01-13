@@ -1,0 +1,23 @@
+{
+  "name": "2.0.0",
+  "version": "1.0.0",
+  "description": "MERN stack ecommerce applicatin",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Rajib Chandra Das",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
