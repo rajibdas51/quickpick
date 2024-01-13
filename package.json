@@ -1,7 +1,7 @@
 {
   "name": "2.0.0",
   "version": "1.0.0",
-  "description": "MERN stack ecommerce applicatin",
+  "description": "MERN stack ecommerce application",
   "type": "module",
   "main": "server.js",
   "scripts": {
