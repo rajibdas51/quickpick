@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 const SingleProductPage = () => {
   const [product, setProduct] = useState({});
   const { id: productId } = useParams();
-
+  console.log(productId);
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get(`/api/products/${productId}`);
+      console.log(data);
       setProduct(data);
     };
     fetchProducts();
