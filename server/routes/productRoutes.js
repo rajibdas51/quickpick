@@ -1,11 +1,13 @@
 import express from 'express';
-import asyncHandler from '../middleware/asyncMiddleware';
+import asyncHandler from '../middleware/asyncMiddleware.js';
+import Product from '../models/productModel.js';
 const router = express.Router();
 
 // Get api to get all the products
 router.get(
   '/',
-  asyncHandler((req, res) => {
+  asyncHandler(async (req, res) => {
+    const products = await Product.find({});
     res.json(products);
   })
 );
@@ -13,9 +15,13 @@ router.get(
 // Get api to get a single product
 router.get(
   '/:id',
-  asyncHandler((req, res) => {
-    const product = products.find((p) => p._id === Number(req.params.id));
-    res.json(product);
+  asyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      return res.json(product);
+    } else {
+      res.status(404).json({ message: 'Product not found!!' });
+    }
   })
 );
 
