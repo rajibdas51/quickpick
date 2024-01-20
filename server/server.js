@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 
 app.use(notFound);
-app.use(errorHanlder);
+app.use(errorHandler);
 app.listen(port, () => {
   console.log(`server is listening to port ${port}`);
 });
