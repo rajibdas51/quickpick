@@ -7,9 +7,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(apiSlice.middleware);
   },
-  middleware:(getDefaultMIddleware)=>{
-    return getDefaultMiddleware().concat(apiSlice.middleware)
-  }
+
   devTools: true,
 });
 
