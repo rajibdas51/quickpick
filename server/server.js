@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import connectDb from './config/db.js';
 import cors from 'cors';
 import productRoutes from './routes/productRoutes.js';
@@ -15,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
+app.use(cookieParser());
 // all the routes
 
 app.get('/', (req, res) => {
