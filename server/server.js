@@ -11,6 +11,9 @@ const port = process.env.PORT || 5000;
 connectDb();
 const app = express();
 
+// body parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // all the routes

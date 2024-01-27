@@ -5,15 +5,28 @@ import User from '../models/userModel.js';
 // @route POST /api/users/login
 //@access Public
 
-const authUser = asyncHandler((req, res) => {
-  res.send('auth User');
+const authUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  console.log(req.body);
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password!!');
+  }
 });
 
 //@desc Register User
 //@route POST /api/users
 //@access Public
 
-const registerUser = asyncHandler((req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   res.send('Register User');
 });
 
@@ -21,7 +34,7 @@ const registerUser = asyncHandler((req, res) => {
 //@route POST /api/users/logout
 //@access Private
 
-const logoutUser = asyncHandler((req, res) => {
+const logoutUser = asyncHandler(async (req, res) => {
   res.send('Logout User');
 });
 
@@ -29,7 +42,7 @@ const logoutUser = asyncHandler((req, res) => {
 //@route GET /api/users/profile
 //@access Private
 
-const updateUserProfile = asyncHandler((req, res) => {
+const updateUserProfile = asyncHandler(async (req, res) => {
   res.send(' update User Profile');
 });
 
@@ -37,7 +50,7 @@ const updateUserProfile = asyncHandler((req, res) => {
 //@route  PUT  /api/users/profile
 //@access Private
 
-const getUserProfile = asyncHandler((req, res) => {
+const getUserProfile = asyncHandler(async (req, res) => {
   res.send(' get User Profile');
 });
 
@@ -45,7 +58,7 @@ const getUserProfile = asyncHandler((req, res) => {
 //@route GET /api/users
 //@access Private/Admin
 
-const getUsers = asyncHandler((req, res) => {
+const getUsers = asyncHandler(async (req, res) => {
   res.send(' get Users');
 });
 
@@ -53,7 +66,7 @@ const getUsers = asyncHandler((req, res) => {
 //@route GET /api/users/:id
 //@access Private/Admin
 
-const getUserById = asyncHandler((req, res) => {
+const getUserById = asyncHandler(async (req, res) => {
   res.send(' get Users by Id');
 });
 
@@ -61,14 +74,14 @@ const getUserById = asyncHandler((req, res) => {
 //@route DELETE /api/users/:id
 //@access Private/Admin
 
-const deleteUser = asyncHandler((req, res) => {
+const deleteUser = asyncHandler(async (req, res) => {
   res.send('delete user');
 });
 //@desc update user
 //@route DELETE /api/users/:id
 //@access Private/Admin
 
-const updateUser = asyncHandler((req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
   res.send('update user');
 });
 
