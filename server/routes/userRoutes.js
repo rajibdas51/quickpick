@@ -11,6 +11,7 @@ import {
   getUserById,
   updateUser,
 } from '../controllers/userController.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 router.route('/').get(protect, admin, getUsers).post(registerUser);
 router.post('/logout', logoutUser);
