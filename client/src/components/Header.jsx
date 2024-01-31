@@ -13,6 +13,7 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../slices/authSlice';
+
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
