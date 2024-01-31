@@ -14,6 +14,7 @@ import App from './App';
 import HomePage from './pages/HomePage';
 import SingleProductPage from './pages/SingleProductPage';
 import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,9 +22,11 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<HomePage />} />
       <Route path='/product/:id' element={<SingleProductPage />} />
       <Route path='/cart' element={<CartPage />} />
+      <Route path='/login' element={<LoginPage />} />
     </Route>
   )
 );
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
