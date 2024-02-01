@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { updateCart } from '../utils/cartUtils';
 const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : { cartItems: [] };
+  : { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' };
 
 // Helper function to add decimals
 
@@ -28,9 +28,14 @@ const cartSlice = createSlice({
       );
       return updateCart(state);
     },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      return updateCart(state);
+    },
   },
 });
 
-export const { addToCart, deleteFromCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart, saveShippingAddress } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
