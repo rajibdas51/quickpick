@@ -51,3 +51,26 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
+/* Checkout steps css */
+/* CheckoutSteps.css */
+
+.checkout-steps {
+  display: flex;
+  align-items: center;
+}
+
+.step {
+  position: relative;
+  padding: 0 15px;
+}
+
+.step::after {
+  content: '>';
+  position: absolute;
+  top: 50%;
+  right: -5px; /* Adjust as needed */
+  transform: translateY(-50%);
+  font-size: 18px; /* Adjust as needed */
+  color: #555; /* Adjust color as needed */
+}
