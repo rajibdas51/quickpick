@@ -20,6 +20,7 @@ import ShippingPage from './pages/ShippingPage';
 import PrivateRoute from './components/PrivateRoute';
 import PaymentPage from './pages/PaymentPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
+import OrgerPage from './pages/OrgerPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path='/shipping' element={<ShippingPage />} />
         <Route path='/payment' element={<PaymentPage />} />
         <Route path='/placeorder' element={<PlaceOrderPage />} />
+        <Route path='/orders/:id' element={<OrgerPage />} />
       </Route>
     </Route>
   )
