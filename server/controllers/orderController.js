@@ -1,5 +1,5 @@
 import asyncHandler from '../middleware/asyncHandler.js';
-import Order from '../models/productModel.js';
+import Order from '../models/orderModel.js';
 
 //@desc Create new Order
 //@route POSt /api/orders
@@ -21,12 +21,13 @@ const addOrderItems = asyncHandler(async (req, res) => {
     throw new Error('No order items Found!!');
   } else {
     const order = new Order({
+      user: req.user._id,
       orderItems: orderItems.map((p) => ({
         ...p,
         product: p._id,
         _id: undefined,
       })),
-      user: req.user._id,
+
       shippingAddress,
       paymentMethod,
       itemsPrice,
