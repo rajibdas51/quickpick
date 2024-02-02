@@ -18,9 +18,9 @@ const ordersApiSlice = apiSlice.injectEndpoints({
     }),
     payOrder: builder.mutation({
       query: ({ orderId, details }) => ({
-        url: `PAYPAL_URL/${orderId}/pay`,
+        url: `${ORDERS_URL}/${orderId}/pay`,
         method: 'PUT',
-        body: { ...details },
+        body: details,
       }),
     }),
     getPayPalClientId: builder.query({
