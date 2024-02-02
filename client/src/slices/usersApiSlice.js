@@ -23,6 +23,13 @@ export const usersApliSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    profile: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/profile`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
