@@ -4,7 +4,7 @@ import { FaTimes } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
-const OrderList = () => {
+const OrderListPage = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
   console.log(orders);
   return (
@@ -62,4 +62,4 @@ const OrderList = () => {
   );
 };
 
-export default OrderList;
+export default OrderListPage;

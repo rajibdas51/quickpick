@@ -97,7 +97,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
-    order.isDeliverd = true;
+    order.isDelivered = true;
     order.deliveredAt = Date.now();
     const updatedOrder = await order.save();
     res.status(200).json(updatedOrder);
