@@ -61,6 +61,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     const updatedProduct = await product.save();
     res.json(updatedProduct);
   } else {
+    res.status(404);
     throw new Error('Resource not Found!!');
   }
 });
