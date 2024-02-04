@@ -117,30 +117,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@access Private/Admin
 
 const getUsers = asyncHandler(async (req, res) => {
-  res.send(' get Users');
-});
+  const users = await User.find({});
 
-//@desc Get user by id
-//@route GET /api/users/:id
-//@access Private/Admin
-
-const getUserById = asyncHandler(async (req, res) => {
-  res.send(' get Users by Id');
-});
-
-//@desc Delete user
-//@route DELETE /api/users/:id
-//@access Private/Admin
-
-const deleteUser = asyncHandler(async (req, res) => {
-  res.send('delete user');
-});
-//@desc update user
-//@route DELETE /api/users/:id
-//@access Private/Admin
-
-const updateUser = asyncHandler(async (req, res) => {
-  res.send('update user');
+  res.status(200).json(users);
 });
 
 export {

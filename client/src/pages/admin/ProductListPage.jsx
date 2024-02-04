@@ -24,7 +24,6 @@ const ProductListPage = () => {
       try {
         await deleteProduct(id);
         toast.success('Product deleted  Successfully!!');
-
         refetch();
       } catch (err) {
         toast.error(err?.data?.message);
