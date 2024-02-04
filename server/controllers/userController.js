@@ -160,7 +160,23 @@ const deleteUser = asyncHandler(async (req, res) => {
 //@access Private/Admin
 
 const updateUser = asyncHandler(async (req, res) => {
-  res.send('update user');
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = Boolean(req.body.isAdmin) || user.isAdmin;
+
+    const updatedUser = user.save();
+    res.status(200).json({
+      _id: updateUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not Found!!');
+  }
 });
 
 export {
