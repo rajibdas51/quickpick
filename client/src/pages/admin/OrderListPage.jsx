@@ -6,7 +6,6 @@ import Loader from '../../components/Loader';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
 const OrderListPage = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  console.log(orders);
   return (
     <>
       <h1>Orders</h1>
