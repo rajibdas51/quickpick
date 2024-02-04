@@ -65,4 +65,5 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new Error('Resource not Found!!');
   }
 });
+
 export { getProducts, getProductsById, createProduct, updateProduct };
