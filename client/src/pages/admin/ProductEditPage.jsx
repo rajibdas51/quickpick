@@ -62,7 +62,6 @@ const ProductEditPage = () => {
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
       toast.success('Product updated');
       refetch();
-      console.log(res);
       navigate('/admin/productlist');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
