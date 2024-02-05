@@ -1,13 +1,17 @@
 import { PRODUCTS_URL, UPLOAD_URL } from '../constants';
 import { apiSlice } from './apiSlice';
-
+import { useParams } from 'react-router-dom';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({ pageNum }) => ({
         url: PRODUCTS_URL,
+        params: {
+          pageNum,
+        },
       }),
       keepUnusedDataFor: 5,
+      providesTags: ['Products'],
     }),
     getProductDetails: builder.query({
       query: (productId) => ({
