@@ -5,6 +5,7 @@ import Product from '../components/Product.jsx';
 import Message from '../components/Message.jsx';
 import { useGetProductsQuery } from '../slices/productApiSlice.js';
 import { useParams } from 'react-router-dom';
+import Paginate from '../components/Paginate.jsx';
 const HomePage = () => {
   const { pageNum } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({ pageNum });
@@ -27,6 +28,9 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
+          <div className='d-flex justify-content-center mt-4'>
+            <Paginate page={data.page} pages={data.pages} />
+          </div>
         </>
       )}
     </>
