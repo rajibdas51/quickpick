@@ -1,5 +1,6 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
+
 import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import Message from '../../components/Message';
@@ -14,8 +15,11 @@ import Paginate from '../../components/Paginate';
 
 const ProductListPage = () => {
   const { pageNum } = useParams();
-  const { data, isLoading, error, refetch } = useGetProductsQuery({ pageNum });
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNum,
+  });
 
+  //console.log(data);
   const [createProduct, { isloading: loadingCreate }] =
     useCreateProductMutation();
 
@@ -67,12 +71,14 @@ const ProductListPage = () => {
         <>
           <Table striped hover responsive className='table-sm'>
             <thead>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
-              <th></th>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th></th>
+              </tr>
             </thead>
             <tbody>
               {data.products.map((product) => (
@@ -103,7 +109,7 @@ const ProductListPage = () => {
         </>
       )}
       <div className='d-flex justify-content-center mt-4'>
-        <Paginate page={data.page} pages={data.pages} isAdmin={true} />
+        <Paginate page={data?.page} pages={data?.pages} isAdmin={true} />
       </div>
     </>
   );

@@ -4,9 +4,10 @@ import { useParams } from 'react-router-dom';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ pageNum }) => ({
+      query: ({ keyword, pageNum }) => ({
         url: PRODUCTS_URL,
         params: {
+          keyword,
           pageNum,
         },
       }),
