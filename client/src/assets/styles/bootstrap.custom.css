@@ -3346,8 +3346,8 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-light {
-  --bs-btn-color: #f4f4f4;
-  --bs-btn-border-color: #f4f4f4;
+  --bs-btn-color: #000000;
+  --bs-btn-border-color: #707070;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #f4f4f4;
   --bs-btn-hover-border-color: #f4f4f4;
