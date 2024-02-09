@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { addToCart } from '../slices/cartSlice';
+import Meta from '../components/Meta';
 const SingleProductPage = () => {
   const { id: productId } = useParams();
 
@@ -71,6 +72,7 @@ const SingleProductPage = () => {
         </Message>
       ) : (
         <>
+          <Meta title={product.title} />
           <Row>
             <Col md={5}>
               <Image src={product?.image} alt={product?.name} fluid />
