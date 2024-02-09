@@ -6,13 +6,16 @@ import Message from '../components/Message.jsx';
 import { useGetProductsQuery } from '../slices/productApiSlice.js';
 import { Link, useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate.jsx';
+import ProductSlider from '../components/ProductSlider.jsx';
 const HomePage = () => {
   const { pageNum, keyword } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNum });
 
   return (
     <>
-      {keyword && (
+      {!keyword ? (
+        <ProductSlider />
+      ) : (
         <Link to='/' className='btn btn-light mb-4'>
           Go Back
         </Link>
