@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Row,
@@ -9,31 +9,20 @@ import {
   Form,
 } from 'react-bootstrap';
 import ProductList from '../components/ProductList';
+import { useGetProductsQuery } from '../slices/productApiSlice.js';
+import { Link, useParams } from 'react-router-dom';
+import Rating from '../components/Rating.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const ShopPage = () => {
-  const initialProducts = [
-    {
-      id: 1,
-      name: 'Product 1',
-      category: 'Electronics',
-      brand: 'Brand A',
-      rating: 4,
-      price: 100,
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      category: 'Clothing',
-      brand: 'Brand B',
-      rating: 3,
-      price: 50,
-    },
-    // Add more products as needed
-  ];
-
-  const [products, setProducts] = useState(initialProducts);
+  const { pageNum, keyword, catName } = useParams();
+  console.log(catName);
+  const { data, isLoading, error } = useGetProductsQuery({ pageNum });
+  const navigate = useNavigate();
+  const ratingArray = [5, 4, 3, 2, 1];
+  const [filterProducts, setFilterProducts] = useState([]);
   const [filters, setFilters] = useState({
-    category: '',
+    category: catName || '',
     brand: [],
     ratings: [],
     minPrice: '',
@@ -53,37 +42,64 @@ const ShopPage = () => {
     }
   };
 
-  const filteredProducts = products.filter((product) => {
-    return (
-      (!filters.category || product.category === filters.category) &&
-      (filters.brand.length === 0 || filters.brand.includes(product.brand)) &&
-      (filters.ratings.length === 0 ||
-        filters.ratings.includes(product.rating)) &&
-      (!filters.minPrice || product.price >= parseInt(filters.minPrice)) &&
-      (!filters.maxPrice || product.price <= parseInt(filters.maxPrice))
-    );
-  });
+  let filteredProducts;
+
+  if (keyword) {
+    filteredProducts = data?.products
+      ?.filter((product) => {
+        return (
+          (!filters.category || product.category === filters.category) &&
+          (filters.brand.length === 0 ||
+            filters.brand.includes(product.brand)) &&
+          (filters.ratings.length === 0 ||
+            filters.ratings.includes(product.rating)) &&
+          (!filters.minPrice || product.price >= parseInt(filters.minPrice)) &&
+          (!filters.maxPrice || product.price <= parseInt(filters.maxPrice))
+        );
+      })
+      .filter((product) => {
+        return product.name.toLowerCase().includes(keyword.toLowerCase());
+      });
+  } else {
+    filteredProducts = data?.products?.filter((product) => {
+      return (
+        (!filters.category || product.category === filters.category) &&
+        (filters.brand.length === 0 || filters.brand.includes(product.brand)) &&
+        (filters.ratings.length === 0 ||
+          filters.ratings.includes(product.rating)) &&
+        (!filters.minPrice || product.price >= parseInt(filters.minPrice)) &&
+        (!filters.maxPrice || product.price <= parseInt(filters.maxPrice))
+      );
+    });
+  }
 
   const uniqueCategories = Array.from(
-    new Set(products.map((product) => product.category))
+    new Set(data?.products?.map((product) => product.category))
   );
   const uniqueBrands = Array.from(
-    new Set(products.map((product) => product.brand))
+    new Set(data?.products?.map((product) => product.brand))
   );
   const uniqueRatings = Array.from(
-    new Set(products.map((product) => product.rating))
+    new Set(data?.products?.map((product) => product.rating))
   );
 
+  useEffect(() => {
+    //setProducts(data?.products);
+
+    console.log('side effect');
+    console.log(data?.products);
+  }, [filters]);
   return (
-    <Container fluid>
+    <Container>
       <Row>
         {/* Sidebar */}
         <Col md={3} className='py-4'>
           <h4>PRODUCT CATEGORIES</h4>
-          <ListGroup variant='flush' className='border-bottom my-3'>
+          <ListGroup variant='flush' className='border-bottom my-3 pb-3'>
             <ListGroup.Item
               action
               onClick={() => handleFilterChange('category', '')}
+              style={{ borderBottom: '0', padding: '0.5rem' }}
             >
               All Categories
             </ListGroup.Item>
@@ -92,6 +108,7 @@ const ShopPage = () => {
                 key={category}
                 action
                 onClick={() => handleFilterChange('category', category)}
+                style={{ borderBottom: '0', padding: '0.5rem' }}
               >
                 {category}
               </ListGroup.Item>
@@ -118,19 +135,21 @@ const ShopPage = () => {
 
           <h4 className='mt-3'>FILTER BY RATING</h4>
           <Form className='border-bottom my-4 pb-3'>
-            {uniqueRatings.map((rating) => (
-              <Form.Check
-                key={rating}
-                type='checkbox'
-                label={`Rating ${rating}+`}
-                checked={filters.ratings.includes(rating)}
-                onChange={() =>
-                  handleFilterChange(
-                    'ratings',
-                    toggleArrayValue(filters.ratings, rating)
-                  )
-                }
-              />
+            {ratingArray.map((rating) => (
+              <div key={rating} className='d-flex align-items-center'>
+                <Form.Check
+                  type='checkbox'
+                  label=''
+                  checked={filters.ratings.includes(rating)}
+                  onChange={() =>
+                    handleFilterChange(
+                      'ratings',
+                      toggleArrayValue(filters.ratings, rating)
+                    )
+                  }
+                />
+                <Rating value={rating} text='' />
+              </div>
             ))}
           </Form>
 
@@ -166,9 +185,27 @@ const ShopPage = () => {
 
         {/* Product List */}
         <Col md={9}>
-          <h2>Products</h2>
+          {keyword ||
+            (catName && (
+              <>
+                <h1>
+                  Search Results for "
+                  {keyword ? keyword : catName ? `${catName} category` : ''}"
+                </h1>
+                <Link to='/shop' className='btn btn-light'>
+                  Back to Shop
+                </Link>
+              </>
+            ))}
           <Row>
-            <ProductList />
+            <ProductList
+              products={filteredProducts}
+              isLoading={isLoading}
+              keyword={keyword}
+              error={error}
+              page={data?.page}
+              pages={data?.pages}
+            />
           </Row>
         </Col>
       </Row>

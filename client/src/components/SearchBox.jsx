@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 const SearchBox = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { keyword: urlKeyword } = useParams();
+
+  //console.log(location.pathname.includes('shop'));
   const [keyword, setKeyword] = useState(urlKeyword || '');
   const submitHandler = (e) => {
     e.preventDefault();
-    if (keyword.trim()) {
+    if (location.pathname.includes('shop')) {
+      setKeyword('');
+      navigate(`/shop/search/${keyword}`);
+    } else if (keyword.trim()) {
       setKeyword('');
       navigate(`/search/${keyword}`);
     } else {
@@ -15,7 +24,7 @@ const SearchBox = () => {
     }
   };
   return (
-    <Form onSubmit={submitHandler} className='d-flex'>
+    <Form onSubmit={submitHandler} className='d-flex mx-5'>
       <Form.Control
         type='text'
         name='q'
@@ -23,6 +32,7 @@ const SearchBox = () => {
         value={keyword}
         placeholder='Search Products...'
         className='mr-sm-2 ml-sm-5'
+        style={{ width: '25vw' }}
       ></Form.Control>
       <Button type='submit' variant='outline-light' className='p-2 mx-2'>
         Search

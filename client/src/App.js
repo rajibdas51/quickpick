@@ -9,8 +9,8 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className='py-3'>
-        <Container>
+      <main className='py-3 px-0 mx-0'>
+        <Container className=' px-0 '>
           <Outlet />
         </Container>
       </main>

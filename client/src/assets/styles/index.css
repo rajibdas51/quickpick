@@ -75,6 +75,12 @@ table th {
   color: #555; /* Adjust color as needed */
 }
 
+/* Header css */
+.cart-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
 /* Footer css */
 .links > li > a {
   list-style-type: none;

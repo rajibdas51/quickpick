@@ -6,18 +6,12 @@ import Message from '../components/Message.jsx';
 import { useGetProductsQuery } from '../slices/productApiSlice.js';
 import { Link, useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate.jsx';
-import ProductSlider from '../components/ProductSlider.jsx';
-const ProductList = () => {
-  const { pageNum, keyword } = useParams();
-  const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNum });
+const ProductList = ({ products, keyword, isLoading, error, page, pages }) => {
+  //const { pageNum, keyword } = useParams();
+  // const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNum });
 
   return (
     <>
-      {keyword && (
-        <Link to='/' className='btn btn-light mb-4'>
-          Go Back
-        </Link>
-      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -26,9 +20,8 @@ const ProductList = () => {
         </Message>
       ) : (
         <>
-          <h1>Latest Products</h1>
-          <Row>
-            {data.products.map((product) => (
+          <Row className='pe-0'>
+            {products?.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
               </Col>
@@ -36,8 +29,8 @@ const ProductList = () => {
           </Row>
           <div className='d-flex justify-content-center mt-4'>
             <Paginate
-              page={data.page}
-              pages={data.pages}
+              page={page}
+              pages={pages}
               keyword={keyword ? keyword : ''}
             />
           </div>
