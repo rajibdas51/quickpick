@@ -81,6 +81,16 @@ table th {
   margin-right: 0.5rem;
 }
 
+/* Product css */
+
+.product-image {
+  height: 200px;
+  width: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* Footer css */
 .links > li > a {
   list-style-type: none;

@@ -7,7 +7,7 @@ const Product = ({ product }) => {
   return (
     <Card className='my-3  ' style={{ border: 'none', boxShadow: 'none' }}>
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant='top' />
+        <Card.Img src={product.image} variant='top' fluid />
       </Link>
       <Card.Body>
         <Link to={`/product/${product._id}`}>
@@ -18,7 +18,7 @@ const Product = ({ product }) => {
         <Card.Text as='div'>
           <Rating
             value={product.rating}
-            text={`${product.numRevies} reviews`}
+            text={product.numReviews ? `${product.numReviews} reviews` : ''}
           />
         </Card.Text>
         <Card.Text as='h3'>${product.price}</Card.Text>
