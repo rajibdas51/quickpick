@@ -7,6 +7,8 @@ import { useGetProductsQuery } from '../slices/productApiSlice.js';
 import { Link, useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate.jsx';
 import ProductSlider from '../components/ProductSlider.jsx';
+import ProductLoader from '../components/ProductLoader.jsx';
+import FeaturedCategories from '../components/FeaturedCategories.jsx';
 const HomePage = () => {
   const { pageNum, keyword } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNum });
@@ -21,14 +23,15 @@ const HomePage = () => {
         </Link>
       )}
       {isLoading ? (
-        <Loader />
+        <ProductLoader />
       ) : error ? (
         <Message variant='danger'>
           {error?.data?.message || error.error}
         </Message>
       ) : (
         <>
-          <h1>Latest Products</h1>
+          <FeaturedCategories />
+          <h1 className='text-center my-4'>Latest Products</h1>
           <Row>
             {data.products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

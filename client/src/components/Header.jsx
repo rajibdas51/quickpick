@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Badge,
-  Navbar,
-  Nav,
-  Container,
-  NavbarBrand,
-  NavDropdown,
-} from 'react-bootstrap';
+import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
@@ -37,7 +30,7 @@ const Header = () => {
     }
   };
   return (
-    <header>
+    <header style={{ background: '#ffff' }}>
       <Navbar bg='light' variant='light' expand='md' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
