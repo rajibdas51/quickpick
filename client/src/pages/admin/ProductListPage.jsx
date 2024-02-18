@@ -14,10 +14,8 @@ import { toast } from 'react-toastify';
 import Paginate from '../../components/Paginate';
 
 const ProductListPage = () => {
-  const { pageNum } = useParams();
-  const { data, isLoading, error, refetch } = useGetProductsQuery({
-    pageNum,
-  });
+  //const { pageNum } = useParams();
+  const { products, isLoading, error, refetch } = useGetProductsQuery();
 
   //console.log(data);
   const [createProduct, { isloading: loadingCreate }] =
@@ -81,7 +79,7 @@ const ProductListPage = () => {
               </tr>
             </thead>
             <tbody>
-              {data.products.map((product) => (
+              {products?.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -108,9 +106,7 @@ const ProductListPage = () => {
           </Table>
         </>
       )}
-      <div className='d-flex justify-content-center mt-4'>
-        <Paginate page={data?.page} pages={data?.pages} isAdmin={true} />
-      </div>
+      <div className='d-flex justify-content-center mt-4'></div>
     </>
   );
 };

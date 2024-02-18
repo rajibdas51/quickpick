@@ -1,4 +1,4 @@
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import React from 'react';
 import Loader from '../components/Loader.jsx';
 import Product from '../components/Product.jsx';
@@ -9,9 +9,10 @@ import Paginate from '../components/Paginate.jsx';
 import ProductSlider from '../components/ProductSlider.jsx';
 import ProductLoader from '../components/ProductLoader.jsx';
 import FeaturedCategories from '../components/FeaturedCategories.jsx';
+import { LinkContainer } from 'react-router-bootstrap';
 const HomePage = () => {
   const { pageNum, keyword } = useParams();
-  const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNum });
+  const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (
     <>
@@ -33,18 +34,17 @@ const HomePage = () => {
           <FeaturedCategories />
           <h1 className='text-center my-4'>Latest Products</h1>
           <Row>
-            {data.products.map((product) => (
+            {products.slice(0, 8).map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
               </Col>
             ))}
           </Row>
           <div className='d-flex justify-content-center mt-4'>
-            <Paginate
-              page={data.page}
-              pages={data.pages}
-              keyword={keyword ? keyword : ''}
-            />
+            <Link to='/shop'>
+              {' '}
+              <Button>Show More..</Button>
+            </Link>
           </div>
         </>
       )}

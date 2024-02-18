@@ -5,9 +5,10 @@ import Product from '../models/productModel.js';
 //@route GET /api/products
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 12;
-  const page = Number(req.query.pageNum) || 1;
+  // const pageSize = 12;
+  //const page = Number(req.query.pageNum) || 1;
 
+  //const catName = req.query.catName;
   /* 
   const keyword = req.query.keyword
     ? {
@@ -18,13 +19,11 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {}; // search product using keywords
 */
-  const count = await Product.countDocuments({});
+  //let products = [];
 
-  const products = await Product.find({})
-    .limit(pageSize)
-    .skip(pageSize * (page - 1));
-
-  res.json({ products, page, pages: Math.ceil(count / pageSize) });
+  // const count = await Product.countDocuments({});
+  const products = await Product.find({});
+  res.status(200).json(products);
 });
 
 //@desc fetch single product by id
@@ -143,6 +142,15 @@ const getTopProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({}).sort({ rating: -1 }).limit(3);
   res.status(200).json(products);
 });
+//@des get All categories
+//@route GET /api/products/categories
+//access Public
+
+const getAllCategories = asyncHandler(async (req, res) => {
+  const categories = await Product.find({});
+  res.status(200).json(categories);
+});
+
 export {
   getProducts,
   getProductsById,
@@ -151,4 +159,5 @@ export {
   deleteProduct,
   createProductReview,
   getTopProducts,
+  getAllCategories,
 };

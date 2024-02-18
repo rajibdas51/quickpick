@@ -1,15 +1,11 @@
 import { PRODUCTS_URL, UPLOAD_URL } from '../constants';
 import { apiSlice } from './apiSlice';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ keyword, pageNum }) => ({
+      query: () => ({
         url: PRODUCTS_URL,
-        params: {
-          keyword,
-          pageNum,
-        },
       }),
       keepUnusedDataFor: 5,
       providesTags: ['Products'],
@@ -62,6 +58,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getAllCategories: builder.query({
+      query: () => ({
+        url: `${PRODUCTS_URL}/categories`,
+      }),
+      keepUnusedDataFor: 5,
+      providesTags: ['Products'],
+    }),
   }),
 });
 
@@ -74,4 +77,5 @@ export const {
   useDeleteProductMutation,
   useCreateReviewMutation,
   useGetTopProductsQuery,
+  useGetAllCategoriesQuery,
 } = productsApiSlice;

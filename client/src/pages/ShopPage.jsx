@@ -9,15 +9,21 @@ import {
   Form,
 } from 'react-bootstrap';
 import ProductList from '../components/ProductList';
-import { useGetProductsQuery } from '../slices/productApiSlice.js';
+import {
+  useGetProductsQuery,
+  useGetAllCategoriesQuery,
+} from '../slices/productApiSlice.js';
 import { Link, useParams } from 'react-router-dom';
 import Rating from '../components/Rating.jsx';
 import { useNavigate } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const ShopPage = () => {
   const { pageNum, keyword, catName } = useParams();
-  console.log(catName);
-  const { data, isLoading, error } = useGetProductsQuery({ pageNum });
+  const { data: products, isLoading, error } = useGetProductsQuery();
+  //console.log(products);
+  const { data: categories } = useGetAllCategoriesQuery();
+  //console.log(categories);
   const navigate = useNavigate();
   const ratingArray = [5, 4, 3, 2, 1];
   const [filterProducts, setFilterProducts] = useState([]);
@@ -45,7 +51,7 @@ const ShopPage = () => {
   let filteredProducts;
 
   if (keyword) {
-    filteredProducts = data?.products
+    filteredProducts = products
       ?.filter((product) => {
         return (
           (!filters.category || product.category === filters.category) &&
@@ -61,7 +67,7 @@ const ShopPage = () => {
         return product.name.toLowerCase().includes(keyword.toLowerCase());
       });
   } else {
-    filteredProducts = data?.products?.filter((product) => {
+    filteredProducts = products?.filter((product) => {
       return (
         (!filters.category || product.category === filters.category) &&
         (filters.brand.length === 0 || filters.brand.includes(product.brand)) &&
@@ -74,20 +80,17 @@ const ShopPage = () => {
   }
 
   const uniqueCategories = Array.from(
-    new Set(data?.products?.map((product) => product.category))
+    new Set(products?.map((product) => product.category))
   );
   const uniqueBrands = Array.from(
-    new Set(data?.products?.map((product) => product.brand))
+    new Set(products?.map((product) => product.brand))
   );
   const uniqueRatings = Array.from(
-    new Set(data?.products?.map((product) => product.rating))
+    new Set(products?.map((product) => product.rating))
   );
 
   useEffect(() => {
     //setProducts(data?.products);
-
-    console.log('side effect');
-    console.log(data?.products);
   }, [filters]);
   return (
     <Container>
@@ -95,25 +98,29 @@ const ShopPage = () => {
         {/* Sidebar */}
         <Col md={3} className='py-4'>
           <h4>PRODUCT CATEGORIES</h4>
-          <ListGroup variant='flush' className='border-bottom my-3 pb-3'>
-            <ListGroup.Item
-              action
-              onClick={() => handleFilterChange('category', '')}
-              style={{ borderBottom: '0', padding: '0.5rem' }}
+          <Form>
+            <Form.Group
+              controlId='categoryFilter'
+              className='border-bottom my-3 pb-3'
             >
-              All Categories
-            </ListGroup.Item>
-            {uniqueCategories.map((category) => (
-              <ListGroup.Item
-                key={category}
-                action
-                onClick={() => handleFilterChange('category', category)}
-                style={{ borderBottom: '0', padding: '0.5rem' }}
-              >
-                {category}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+              <Form.Check
+                type='radio'
+                label='All Categories'
+                checked={filters.category === ''}
+                onChange={() => handleFilterChange('category', '')}
+              />
+
+              {uniqueCategories?.map((category) => (
+                <Form.Check
+                  type='radio'
+                  label={category}
+                  checked={filters.category === category}
+                  onChange={() => handleFilterChange('category', category)}
+                  id={`category-${category}`}
+                />
+              ))}
+            </Form.Group>
+          </Form>
 
           <h4 className='mt-3'> FILTER BY BRANDS</h4>
           <Form className='border-bottom my-3 pb-3'>
@@ -203,8 +210,6 @@ const ShopPage = () => {
               isLoading={isLoading}
               keyword={keyword}
               error={error}
-              page={data?.page}
-              pages={data?.pages}
             />
           </Row>
         </Col>

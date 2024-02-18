@@ -12,10 +12,9 @@ import { useGetProductsQuery } from '../slices/productApiSlice';
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
-  const { pageNum } = useParams();
 
-  const { data, error, isLoading } = useGetProductsQuery({ pageNum });
-  const categories = data?.products.map((product) => product.category);
+  const { data: products, isLoading } = useGetProductsQuery();
+  const categories = products?.map((product) => product.category);
   const uniqueCategories = [...new Set(categories)];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,8 +29,8 @@ const Header = () => {
     }
   };
   return (
-    <header style={{ background: '#ffff' }}>
-      <Navbar bg='light' variant='light' expand='md' collapseOnSelect>
+    <header style={{ backgroundColor: '#ffff' }}>
+      <Navbar expand='md' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>QuickPick</Navbar.Brand>

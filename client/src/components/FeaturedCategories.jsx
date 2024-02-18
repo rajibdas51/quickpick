@@ -24,7 +24,7 @@ const FeaturedCategories = () => {
       <Row className='my-4 justify-content-center'>
         {categories.map((category) => (
           <LinkContainer to={`/shop/category/${category.name}`}>
-            <Col md={2} lg={2} sm={6} className=' category ms-2 mb-2 p-2'>
+            <Col md={2} lg={2} sm={6} className=' category ms-3 mb-2 p-2'>
               <img src={category.image} alt={category.name} className='py-2' />
               <h3>{category.name}</h3>
             </Col>
