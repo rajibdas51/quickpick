@@ -42,7 +42,7 @@ const Header = () => {
               <Nav.Link href='/shop'>Shop</Nav.Link>
               <NavDropdown title='Categories' id='nav-dropdown'>
                 {uniqueCategories?.map((category, index) => (
-                  <LinkContainer to={`/shop/category/${category} `}>
+                  <LinkContainer to={`/shop/category/${category} `} key={index}>
                     <NavDropdown.Item eventKey='4.1'>{`${category}`}</NavDropdown.Item>
                   </LinkContainer>
                 ))}

@@ -95,48 +95,54 @@ const SingleProductPage = () => {
                 </ListGroup.Item>
               </ListGroup>
 
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      <strong>
-                        $
-                        {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
-                      </strong>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-                {product.countInStock > 0 && (
+              <ListGroup>
+                <Col md={7}>
                   <ListGroup.Item>
                     <Row>
-                      <Col>Qty:</Col>
+                      <Col>Status:</Col>
                       <Col>
-                        <Form.Control
-                          as='select'
-                          value={qty}
-                          onChange={(e) => setQty(Number(e.target.value))}
-                        >
-                          {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
+                        <strong>
+                          $
+                          {product.countInStock > 0
+                            ? 'In Stock'
+                            : 'Out of Stock'}
+                        </strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                )}
-                <ListGroup.Item>
-                  <Button
-                    className='btn-block'
-                    type='button'
-                    disabled={product.countInStock === 0}
-                    onClick={addToCartHandler}
-                  >
-                    Add To Cart
-                  </Button>
-                </ListGroup.Item>
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty:</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            value={qty}
+                            onChange={(e) => setQty(Number(e.target.value))}
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
+                  <ListGroup.Item>
+                    <Button
+                      className='btn-block'
+                      type='button'
+                      disabled={product.countInStock === 0}
+                      onClick={addToCartHandler}
+                    >
+                      Add To Cart
+                    </Button>
+                  </ListGroup.Item>
+                </Col>
               </ListGroup>
             </Col>
           </Row>

@@ -39,22 +39,24 @@ const Product = ({ product }) => {
             <div className='icon-container'>
               <Link to={`/product/${product._id}`}>
                 <OverlayTrigger
-                  placement='bottom'
-                  overlay={<Tooltip id={`tooltip-view`}>Quick View</Tooltip>}
-                  className='btn-quick-view'
+                  overlay={<Tooltip id='tooltip-disabled'>Quick View</Tooltip>}
                 >
-                  <FaEye className='icon' />
+                  <span className='d-inline-block'>
+                    <FaEye className='icon' />
+                  </span>
                 </OverlayTrigger>
               </Link>
 
               <OverlayTrigger
+                overlay={
+                  <Tooltip id='tooltip-disabled'>Add to Favorites</Tooltip>
+                }
                 placement='bottom'
                 className='btn-favourite'
-                overlay={
-                  <Tooltip id={`tooltip-favorite`}>Add to Favorites</Tooltip>
-                }
               >
-                <FaHeart className='icon' />
+                <span className='d-inline-block'>
+                  <FaHeart className='icon' />
+                </span>
               </OverlayTrigger>
             </div>
           </div>

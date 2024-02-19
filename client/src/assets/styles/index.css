@@ -167,11 +167,12 @@ table th {
 .btn-quick-view {
   right: 0;
   left: 90%;
-  top: 10%;
+  top: 5%;
 }
 .btn-favourite {
   right: 0;
-  top: 20%;
+  top: 10%;
+  padding-bottom: 10px;
 }
 
 .icon-container {
@@ -183,7 +184,7 @@ table th {
   border-radius: 0 0 10px 10px;
   position: absolute;
 
-  top: 30%;
+  top: 20%;
   right: 5px;
 }
 .icon {

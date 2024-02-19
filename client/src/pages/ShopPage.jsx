@@ -13,15 +13,17 @@ import {
   useGetProductsQuery,
   useGetAllCategoriesQuery,
 } from '../slices/productApiSlice.js';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import Rating from '../components/Rating.jsx';
 import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const ShopPage = () => {
-  const { pageNum, keyword, catName } = useParams();
+  const { pageNum, keyword, catName, search } = useParams();
   const { data: products, isLoading, error } = useGetProductsQuery();
-  //console.log(products);
+  const [categoryName, setCategoryName] = useState('');
+  const [sortBy, setSortBy] = useState('');
+  //console.log(catName);
   const { data: categories } = useGetAllCategoriesQuery();
   //console.log(categories);
   const navigate = useNavigate();
@@ -48,7 +50,7 @@ const ShopPage = () => {
     }
   };
 
-  let filteredProducts;
+  let filteredProducts = [];
 
   if (keyword) {
     filteredProducts = products
@@ -79,6 +81,13 @@ const ShopPage = () => {
     });
   }
 
+  // Apply Sorting based on price
+  if (sortBy === 'lowToHigh') {
+    filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+  } else if (sortBy === 'highToLow') {
+    filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+  }
+
   const uniqueCategories = Array.from(
     new Set(products?.map((product) => product.category))
   );
@@ -91,7 +100,12 @@ const ShopPage = () => {
 
   useEffect(() => {
     //setProducts(data?.products);
-  }, [filters]);
+    //  setFilters({ ...filters, category: catName });
+    // setCategoryName(catName);
+    // navigate('/shop');
+    //window.location.reload();
+  }, [filters, catName, keyword, sortBy]);
+
   return (
     <Container>
       <Row>
@@ -114,7 +128,9 @@ const ShopPage = () => {
                 <Form.Check
                   type='radio'
                   label={category}
-                  checked={filters.category === category}
+                  checked={
+                    filters.category === category || categoryName === category
+                  }
                   onChange={() => handleFilterChange('category', category)}
                   id={`category-${category}`}
                 />
@@ -192,19 +208,31 @@ const ShopPage = () => {
 
         {/* Product List */}
         <Col md={9}>
-          {keyword ||
-            (catName && (
-              <>
-                <h1>
-                  Search Results for "
-                  {keyword ? keyword : catName ? `${catName} category` : ''}"
-                </h1>
-                <Link to='/shop' className='btn btn-light'>
-                  Back to Shop
-                </Link>
-              </>
-            ))}
+          {keyword && (
+            <>
+              <h1>Search Results for {keyword}</h1>
+              <Link to='/shop' className='btn btn-light'>
+                Back to Shop
+              </Link>
+            </>
+          )}
+
           <Row>
+            <Row>
+              <Col md={9}></Col>
+              <Col md={3} className='py-3'>
+                <Form>
+                  <Form.Select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value=''>Sort By</option>
+                    <option value='lowToHigh'>Price Low to High</option>
+                    <option value='highToLow'>Price High to Low</option>
+                  </Form.Select>
+                </Form>
+              </Col>
+            </Row>
             <ProductList
               products={filteredProducts}
               isLoading={isLoading}
