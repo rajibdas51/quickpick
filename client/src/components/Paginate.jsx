@@ -1,23 +1,28 @@
 import { Pagination } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-const Paginate = ({ pages, page, isAdmin = false, keyword = '' }) => {
+const Paginate = ({
+  totalProducts,
+  productsPerPage,
+  setCurrentPage,
+  currentPage,
+}) => {
+  //console.log(totalProducts);
   return (
-    pages > 1 && (
+    totalProducts > 1 && (
       <Pagination>
-        {[...Array(pages).keys()].map((p) => (
-          <LinkContainer
-            key={p + 1}
-            to={
-              !isAdmin
-                ? keyword
-                  ? `/${keyword}/page/${p + 1}`
-                  : `/shop/page/${p + 1}`
-                : `/admin/productlist/${p + 1}`
-            }
-          >
-            <Pagination.Item active={p + 1 === page}>{p + 1}</Pagination.Item>
-          </LinkContainer>
-        ))}
+        {[...Array(Math.ceil(totalProducts / productsPerPage)).keys()].map(
+          (p) => (
+            <LinkContainer
+              to=''
+              key={p + 1}
+              onClick={() => setCurrentPage(p + 1)}
+            >
+              <Pagination.Item active={p + 1 === currentPage}>
+                {p + 1}
+              </Pagination.Item>
+            </LinkContainer>
+          )
+        )}
       </Pagination>
     )
   );

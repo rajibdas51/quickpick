@@ -211,3 +211,9 @@ table th {
 .radio-link > input:checked + .custom-control-label::after {
   color: #000000; /* Change this to your desired active color */
 }
+
+/* ----------paginate css----------- */
+.paginate-container {
+  justify-content: center !important;
+  margin: 0 auto;
+}

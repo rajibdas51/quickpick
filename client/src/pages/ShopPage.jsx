@@ -17,12 +17,17 @@ import { Link, useParams, useLocation } from 'react-router-dom';
 import Rating from '../components/Rating.jsx';
 import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import Paginate from '../components/Paginate.jsx';
 
 const ShopPage = () => {
   const { pageNum, keyword, catName, search } = useParams();
   const { data: products, isLoading, error } = useGetProductsQuery();
   const [categoryName, setCategoryName] = useState('');
   const [sortBy, setSortBy] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(12);
+  const lastProductIndex = currentPage * productsPerPage;
+  const firstProductIndex = lastProductIndex - productsPerPage;
   //console.log(catName);
   const { data: categories } = useGetAllCategoriesQuery();
   //console.log(categories);
@@ -106,6 +111,10 @@ const ShopPage = () => {
     //window.location.reload();
   }, [filters, catName, keyword, sortBy]);
 
+  const currentProducts = filteredProducts?.slice(
+    firstProductIndex,
+    lastProductIndex
+  );
   return (
     <Container>
       <Row>
@@ -233,12 +242,23 @@ const ShopPage = () => {
                 </Form>
               </Col>
             </Row>
+
             <ProductList
-              products={filteredProducts}
+              products={currentProducts}
               isLoading={isLoading}
               keyword={keyword}
               error={error}
             />
+            <Row className=' paginate-container'>
+              <Col class=' align-self-end'>
+                <Paginate
+                  totalProducts={filteredProducts?.length}
+                  productsPerPage={productsPerPage}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
+              </Col>
+            </Row>
           </Row>
         </Col>
       </Row>
