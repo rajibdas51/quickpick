@@ -44,7 +44,9 @@ const HomePage = () => {
           <div className='d-flex justify-content-center  mt-4 mb-5'>
             <Link to='/shop'>
               {' '}
-              <Button variant='warning'>Show More Products</Button>
+              <Button variant='warning' className='text-light'>
+                Show More Products
+              </Button>
             </Link>
           </div>
           <Row>

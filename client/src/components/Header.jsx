@@ -1,5 +1,12 @@
 import React from 'react';
-import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import {
+  Badge,
+  Navbar,
+  Nav,
+  Container,
+  NavDropdown,
+  Image,
+} from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
@@ -33,7 +40,13 @@ const Header = () => {
       <Navbar expand='md' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>QuickPick</Navbar.Brand>
+            <Navbar.Brand>
+              <Image
+                src='/images/logo.jpg'
+                alt='logo'
+                style={{ width: '100%', height: '60px' }}
+              />
+            </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls='basic-navbar-nav' />

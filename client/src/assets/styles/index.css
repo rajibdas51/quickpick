@@ -22,8 +22,11 @@ main {
   overflow: hidden; /* Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
   white-space: nowrap; /* Prevent wrapping */
+  text-decoration: none;
 }
-
+.card-body a {
+  text-decoration: none;
+}
 table td,
 table th {
   text-align: center;
