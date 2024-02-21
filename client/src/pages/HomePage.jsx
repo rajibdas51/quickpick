@@ -10,6 +10,7 @@ import ProductSlider from '../components/ProductSlider.jsx';
 import ProductLoader from '../components/ProductLoader.jsx';
 import FeaturedCategories from '../components/FeaturedCategories.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
+import ProductGallery from '../components/ProductGallery.jsx';
 const HomePage = () => {
   const { pageNum, keyword } = useParams();
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -40,12 +41,15 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
-          <div className='d-flex justify-content-center mt-4'>
+          <div className='d-flex justify-content-center  mt-4 mb-5'>
             <Link to='/shop'>
               {' '}
-              <Button>Show More..</Button>
+              <Button variant='warning'>Show More Products</Button>
             </Link>
           </div>
+          <Row>
+            <ProductGallery />
+          </Row>
         </>
       )}
     </>

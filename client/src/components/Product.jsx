@@ -31,6 +31,7 @@ const Product = ({ product }) => {
                 className='btn-add-to-cart'
                 disabled={product.countInStock === 0}
                 onClick={addToCartHandler}
+                variant='warning'
               >
                 Add To Cart
               </Button>

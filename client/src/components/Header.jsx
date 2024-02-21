@@ -48,11 +48,19 @@ const Header = () => {
                 ))}
               </NavDropdown>
               <SearchBox className='mx-5' />
-              <Nav.Link href='/cart'>
+              <Nav.Link href='/cart' className='me-3'>
                 <FaShoppingCart className='cart-icon' />
 
                 {cartItems.length > 0 && (
-                  <Badge pill bg='warning' style={{ marginLeft: '5px' }}>
+                  <Badge
+                    pill
+                    bg='warning'
+                    style={{
+                      position: 'absolute',
+                      marginTop: '-5px',
+                      marginRight: '5px',
+                    }}
+                  >
                     {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   </Badge>
                 )}

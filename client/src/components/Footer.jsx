@@ -72,7 +72,7 @@ const Footer = () => {
               <Form.Group controlId='email' className='my-3'>
                 <Form.Control type='email' placeholder='Enter email' />
               </Form.Group>
-              <Button type='submit' variant='light' c>
+              <Button type='submit' variant='warning' c>
                 Subscribe
               </Button>
             </Form>

@@ -15,7 +15,7 @@ import Paginate from '../../components/Paginate';
 
 const ProductListPage = () => {
   //const { pageNum } = useParams();
-  const { products, isLoading, error, refetch } = useGetProductsQuery();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
 
   //console.log(data);
   const [createProduct, { isloading: loadingCreate }] =
@@ -76,6 +76,7 @@ const ProductListPage = () => {
                 <th>CATEGORY</th>
                 <th>BRAND</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -92,6 +93,9 @@ const ProductListPage = () => {
                         <FaEdit />
                       </Button>
                     </LinkContainer>
+                  </td>
+                  <td>
+                    {' '}
                     <Button
                       variant='danger'
                       className='btn-sm'

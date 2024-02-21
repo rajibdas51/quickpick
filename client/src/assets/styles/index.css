@@ -163,7 +163,10 @@ table th {
 .btn-add-to-cart {
   width: 100%;
   border-radius: 0 0 4px 4px;
+  color: black;
+  border: none;
 }
+
 .btn-quick-view {
   right: 0;
   left: 90%;
@@ -183,7 +186,6 @@ table th {
   padding: 0.5rem;
   border-radius: 0 0 10px 10px;
   position: absolute;
-
   top: 20%;
   right: 5px;
 }
@@ -197,8 +199,9 @@ table th {
   background-color: #ffffff;
 }
 .icon:hover {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #f5ab35;
+  color: #000000;
+  border: none;
   cursor: pointer;
 }
 
@@ -216,4 +219,17 @@ table th {
 .paginate-container {
   justify-content: center !important;
   margin: 0 auto;
+}
+
+.airpod-img {
+  height: 91%;
+}
+
+/* ----------Category gallery css----------- */
+.g-img {
+  transition: transform 0.5s ease-in-out;
+}
+.g-img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }

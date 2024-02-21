@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Category galary image css */
+
+.g-img {
+  transition: transform 0.5s ease-in-out !important;
+}
+.img-fluid,
+.g-img:hover {
+  transform: scale(1.1) !important;
+}
+
+.img-fluid,
+.g-img:hover {
+  width: 10vw;
+  transform: scale(1.1);
+}
