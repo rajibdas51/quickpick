@@ -1,18 +1,15 @@
 import { Row, Col, Button } from 'react-bootstrap';
 import React from 'react';
-import Loader from '../components/Loader.jsx';
 import Product from '../components/Product.jsx';
 import Message from '../components/Message.jsx';
 import { useGetProductsQuery } from '../slices/productApiSlice.js';
 import { Link, useParams } from 'react-router-dom';
-import Paginate from '../components/Paginate.jsx';
 import ProductSlider from '../components/ProductSlider.jsx';
 import ProductLoader from '../components/ProductLoader.jsx';
 import FeaturedCategories from '../components/FeaturedCategories.jsx';
-import { LinkContainer } from 'react-router-bootstrap';
 import ProductGallery from '../components/ProductGallery.jsx';
 const HomePage = () => {
-  const { pageNum, keyword } = useParams();
+  const { keyword } = useParams();
   const { data: products, isLoading, error } = useGetProductsQuery();
 
   return (

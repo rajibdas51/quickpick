@@ -3,8 +3,6 @@ import React from 'react';
 import Loader from '../components/Loader.jsx';
 import Product from '../components/Product.jsx';
 import Message from '../components/Message.jsx';
-import { useGetProductsQuery } from '../slices/productApiSlice.js';
-import { Link, useParams } from 'react-router-dom';
 import Paginate from '../components/Paginate.jsx';
 const ProductList = ({ products, keyword, isLoading, error, page, pages }) => {
   //const { pageNum, keyword } = useParams();

@@ -47,7 +47,11 @@ const ProductSlider = () => {
                 </h1>
               </Link>
               <Link to={`/product/${product._id}`}>
-                <Button variant='warning' size='lg' className='my-3 py-2'>
+                <Button
+                  variant='warning'
+                  size='lg'
+                  className='my-3 py-2 text-light'
+                >
                   Shop Now
                 </Button>
               </Link>

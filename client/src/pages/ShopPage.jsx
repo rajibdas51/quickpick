@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  ListGroup,
-  Card,
-  Button,
-  Form,
-} from 'react-bootstrap';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import ProductList from '../components/ProductList';
 import {
   useGetProductsQuery,
   useGetAllCategoriesQuery,
 } from '../slices/productApiSlice.js';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Rating from '../components/Rating.jsx';
 import { useNavigate } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 import Paginate from '../components/Paginate.jsx';
 
 const ShopPage = () => {
-  const { pageNum, keyword, catName, search } = useParams();
+  const { keyword, catName, search } = useParams();
   const { data: products, isLoading, error } = useGetProductsQuery();
   const [categoryName, setCategoryName] = useState('');
   const [sortBy, setSortBy] = useState('');
@@ -28,12 +19,8 @@ const ShopPage = () => {
   const [productsPerPage, setProductsPerPage] = useState(12);
   const lastProductIndex = currentPage * productsPerPage;
   const firstProductIndex = lastProductIndex - productsPerPage;
-  //console.log(catName);
   const { data: categories } = useGetAllCategoriesQuery();
-  //console.log(categories);
-  const navigate = useNavigate();
   const ratingArray = [5, 4, 3, 2, 1];
-  const [filterProducts, setFilterProducts] = useState([]);
   const [filters, setFilters] = useState({
     category: catName || '',
     brand: [],

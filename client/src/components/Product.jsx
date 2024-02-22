@@ -3,17 +3,24 @@ import { Button, Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { FaShoppingCart, FaEye, FaHeart } from 'react-icons/fa'; // Import necessary icons
+import { FaEye, FaHeart } from 'react-icons/fa'; // Import necessary icons
 import Rating from './Rating';
 import { addToCart } from '../slices/cartSlice';
 import { toast } from 'react-toastify';
+import { addToFavorites } from '../slices/favoriteSlice';
 const Product = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
     toast.success('Item added to cart');
+  };
+
+  const addToFavouriteHandler = () => {
+    dispatch(addToFavorites({ ...product }));
+    setIsFavourite(!isFavourite);
   };
   return (
     <Card
@@ -28,7 +35,7 @@ const Product = ({ product }) => {
           <div className='overlay'>
             <Link to='#' className='overlay-button'>
               <Button
-                className='btn-add-to-cart'
+                className='btn-add-to-cart text-light'
                 disabled={product.countInStock === 0}
                 onClick={addToCartHandler}
                 variant='warning'
@@ -56,7 +63,10 @@ const Product = ({ product }) => {
                 className='btn-favourite'
               >
                 <span className='d-inline-block'>
-                  <FaHeart className='icon' />
+                  <FaHeart
+                    onClick={addToFavouriteHandler}
+                    className={`icon ${isFavourite ? 'favorited' : ''}`}
+                  />
                 </span>
               </OverlayTrigger>
             </div>
