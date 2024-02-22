@@ -22,9 +22,6 @@ app.use(cors());
 app.use(cookieParser());
 // all the routes
 
-app.get('/', (req, res) => {
-  res.send('server is running!!');
-});
 // product routes
 app.use('/api/products', productRoutes);
 // user routes
@@ -44,15 +41,19 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // check for production
 if (process.env.NODE_ENV === 'production') {
-  // set static folder
+  console.log('production');
+  const __dirname = path.resolve();
+  app.use('/uploads', express.static('/var/data/uploads'));
   app.use(express.static(path.join(__dirname, '/client/build')));
-  // any route is not api will be redirected to index.html
+
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   );
 } else {
+  const __dirname = path.resolve();
+  app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
   app.get('/', (req, res) => {
-    res.send('server is running!!');
+    res.send('Api is running....');
   });
 }
 
