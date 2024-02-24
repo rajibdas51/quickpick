@@ -37,7 +37,7 @@ git clone https://github.com/your-username/quickpick.git
 cd quickpick
 
 
-##Setup Environment Variables
+### Setup Environment Variables
 
 Create a .env file in the root directory and add your configuration details:
 
@@ -48,14 +48,14 @@ JWT_SECRET=your-secret-key
 PAYPAL_CLIENT_ID=your-paypal-client-id
 
 
-##Install Dependencies
+### Install Dependencies
 
 npm install
 cd frontend
 npm install
 
 
-##Run the Application
+### Run the Application
 
 Run both frontend and backend concurrently:
 npm run dev
@@ -64,7 +64,7 @@ npm run dev
 
 npm run server
 
-###Database Operations
+### Database Operations
 
 -**Import sample data:
 
@@ -73,11 +73,16 @@ npm run data:import
 -**Destroy all data:
 
 npm run data:destroy
-
-##Live Demo
+ 
+## Live Demo
 
 Explore the live demo of QuickPick [here](https://quickpick-aill.onrender.com/).
 
-#Contributing
+# Contributing
 
 Feel free to report issues, or provide feedback to help us enhance QuickPick.
+
+
+
+
+
