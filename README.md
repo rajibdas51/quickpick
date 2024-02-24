@@ -32,10 +32,10 @@ QuickPick is a full-fledged e-commerce application developed using the MERN (Mon
 
 ### Clone the Repository
 
-
+```
 git clone https://github.com/your-username/quickpick.git
 cd quickpick
-
+```
 
 ### Setup Environment Variables
 
@@ -49,31 +49,32 @@ Create a .env file in the root directory and add your configuration details:
 ```
 
 ### Install Dependencies
-
+```
 npm install
 cd frontend
 npm install
-
+```
 
 ### Run the Application
 
 Run both frontend and backend concurrently:
+```
 npm run dev
-
+```
 #Run only the backend:
-
+```
 npm run server
-
+```
 ### Database Operations
 
-- **Import sample data:
-
+- Import sample data:
+```
 npm run data:import
-
-- **Destroy all data:
-
+```
+- Destroy all data:
+```
 npm run data:destroy
- 
+ ```
 ## Live Demo
 
 Explore the live demo of QuickPick [here](https://quickpick-aill.onrender.com/).
