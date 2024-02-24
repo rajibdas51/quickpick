@@ -40,13 +40,13 @@ cd quickpick
 ### Setup Environment Variables
 
 Create a .env file in the root directory and add your configuration details:
-
-NODE_ENV=development
-PORT=5000
-MONGO_URI=mongodb://your-mongodb-uri
-JWT_SECRET=your-secret-key
-PAYPAL_CLIENT_ID=your-paypal-client-id
-
+```
+ NODE_ENV=development
+ PORT=5000
+ MONGO_URI=mongodb://your-mongodb-uri
+ JWT_SECRET=your-secret-key
+ PAYPAL_CLIENT_ID=your-paypal-client-id
+```
 
 ### Install Dependencies
 
