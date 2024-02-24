@@ -38,43 +38,46 @@ cd quickpick
 
 
 ##Setup Environment Variables
-#Create a .env file in the root directory and add your configuration details:
+
+Create a .env file in the root directory and add your configuration details:
 
 NODE_ENV=development
 PORT=5000
 MONGO_URI=mongodb://your-mongodb-uri
 JWT_SECRET=your-secret-key
-PAYPAL_CLIENT_ID=your-PayPal-client-id
+PAYPAL_CLIENT_ID=your-paypal-client-id
 
 
 ##Install Dependencies
+
 npm install
 cd frontend
 npm install
 
 
 ##Run the Application
-#Run both frontend and backend concurrently:
+
+Run both frontend and backend concurrently:
 npm run dev
 
 #Run only the backend:
+
 npm run server
 
 ###Database Operations
-#Import sample data:
-npm run data: import
 
-#Destroy all data:
-npm run data:Destroy
+-**Import sample data:
 
-Live Demo
+npm run data:import
+
+-**Destroy all data:
+
+npm run data:destroy
+
+##Live Demo
+
 Explore the live demo of QuickPick [here](https://quickpick-aill.onrender.com/).
 
+#Contributing
 
-Contributing
 Feel free to report issues, or provide feedback to help us enhance QuickPick.
-
-
-
-
-
