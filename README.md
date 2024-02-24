@@ -32,7 +32,7 @@ QuickPick is a full-fledged e-commerce application developed using the MERN (Mon
 
 ### Clone the Repository
 
-```bash
+
 git clone https://github.com/your-username/quickpick.git
 cd quickpick
 
