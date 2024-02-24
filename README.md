@@ -66,11 +66,11 @@ npm run server
 
 ### Database Operations
 
--**Import sample data:
+- **Import sample data:
 
 npm run data:import
 
--**Destroy all data:
+- **Destroy all data:
 
 npm run data:destroy
  
